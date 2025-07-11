@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #ffffff;
+      --bg: #eef1f5;
       --text: #1a202c;
       --accent: #003366;
       --muted: #718096;
@@ -438,10 +438,10 @@
     /* Responsive grid for skill categories */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
     }
-
+   
     .skill-category-header {
       display: flex;
       justify-content: space-between;
@@ -466,8 +466,13 @@
       transition: transform 0.3s ease;
     }
     .skill-category-header[aria-expanded="true"] span {
-      transform: rotate(90deg);
+      display: none;
     }
+
+    .skill-category[aria-expanded="true"] .skill-category-header {
+      justify-content: center;
+    }
+
     .subskills-list {
       padding: 0.5rem 1.5rem 1rem;
       display: none;
@@ -478,6 +483,19 @@
     .subskills-list.active {
       display: block;
     }
+
+    .skill-category-header {
+      justify-content: space-between;
+    }
+
+    .skill-category-header[aria-expanded="true"] {
+      justify-content: center;
+    }
+
+    .skill-category-header[aria-expanded="true"] .header-arrow {
+      display: none;
+    }
+
     .subskill {
       display: flex;
       justify-content: space-between;
