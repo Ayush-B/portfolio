@@ -81,6 +81,24 @@
       background: #002244;
       outline: none;
     }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+      }
+
+      .theme-toggle {
+        align-self: flex-end;
+        margin-top: 0.5rem;
+      }
+    }
     header {
       position: relative;
       max-width: 700px;
@@ -412,15 +430,15 @@
 
     /* Skills grid & categories cards */
      #skills {
-      max-width: 900px;
-      margin: 0 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(80px,0.5fr));
-      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1rem;
     }
+
+    /* Responsive grid for skill categories */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1.5rem;
     }
 
@@ -488,12 +506,45 @@
         white-space: normal;
       }
     }
+
+    /* Hamburger button styles */
+    .hamburger {
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    /* Hide menu on small screens */
+    @media (max-width: 600px) {
+      .hamburger {
+        display: block;
+        align-self: flex-end;
+        margin-top: 0.5rem;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .nav-links.show {
+        max-height: 300px; /* adjust based on number of links */
+      }
+    }
+
   </style>
 </head>
 <body>
   <nav>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme" aria-pressed="false">🌓 Theme</button>
-    <ul>
+    <button id="menuToggle" class="hamburger" aria-label="Toggle navigation">&#9776;</button>
+    <ul id="navLinks" class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#projects">Projects</a></li>
@@ -805,6 +856,14 @@
         }
       });
     });
+
+      const menuToggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
+
+      menuToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+      });
+
   </script>
   <footer style="text-align: center; padding: 2rem 1rem; font-size: 0.9rem; color: var(--muted); background: var(--card-bg); box-shadow: 0 -2px 6px var(--shadow);">
   <p>© 2025 Ayush Bhusal. Built with 💻, 🚀 and ☕</p>
