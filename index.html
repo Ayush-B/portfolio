@@ -85,25 +85,32 @@
     @media (max-width: 600px) {
       nav {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: flex-stretch;
       }
 
       nav ul {
         flex-direction: column;
         gap: 0.75rem;
         margin-top: 0.5rem;
+        width: 100%;
       }
 
       .theme-toggle {
-        align-self: flex-end;
+        align-self: flex-start;
         margin-top: 0.5rem;
       }
+      .nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
     }
     header {
       position: relative;
-      max-width: 700px;
+      max-width: 750px;
       margin: 0.5rem auto 3rem;
-      box-shadow: 0 10px 30px var(--shadow);
+      box-shadow: 0 10px 20px var(--shadow);
       border-radius: 12px;
       overflow: hidden;
       user-select: none;
@@ -111,7 +118,7 @@
     }
     .profile-pic {
       width: 100%;
-      max-height: 620px;
+      max-height: 640px;
       object-fit: cover;
       filter: brightness(0.95);
       transition: filter 0.4s ease;
@@ -160,6 +167,7 @@
       background: var(--accent);
       color: white;
       padding: 0.7rem 1.5rem;
+      border: 1px solid var(--muted);
       border-radius: 6px;
       font-weight: 700;
       font-size: 1rem;
@@ -200,8 +208,9 @@
     /* Education: side by side cards */
     #education > div {
       display: flex;
-      gap: 2rem; /* spacing between cards */
-      flex-wrap: wrap; /* allow wrapping on smaller screens */
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      justify-content: center;
     }
 
     /* Each education card */
@@ -210,11 +219,13 @@
       box-sizing: border-box;
       background: var(--card-bg); /* themable */
       color: var(--text); /* themable text */
-      padding: 1rem 1.4rem;
+      padding: 1rem 2rem;
       border-radius: 8px;
+      border: 1px solid var(--muted);
       box-shadow: 0 3px 10px var(--shadow); /* matches other cards */
       min-width: 320px; /* responsive threshold */
       transition: background var(--transition), color var(--transition);
+      
     }
 
     .edu-card h3 {
@@ -225,13 +236,13 @@
     }
     .edu-card p {
       margin-bottom: 0.5rem;
-      font-weight: 600;
+      font-weight: 800;
       color: var(--text);
     }
     .edu-card .date-gpa {
       font-weight: 500;
       color: var(--muted);
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.5rem;
     }
 
     /* Projects grid & cards */
@@ -242,6 +253,7 @@
     }
     .card {
       background: var(--card-bg);
+      border: 1px solid var(--muted);
       border-radius: 10px;
       padding: 1.4rem 1.6rem;
       box-shadow: 0 3px 10px var(--shadow);
@@ -252,6 +264,8 @@
       display: flex;
       flex-direction: column;
       min-height: 160px;
+      color: var(--text);
+      align-self: start;
     }
     .card:hover, .card:focus {
       transform: translateY(-8px);
@@ -261,7 +275,7 @@
     .card strong {
       font-family: 'Inter', sans-serif;
       font-weight: 700;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: var(--accent);
       margin-bottom: 0.6rem;
       user-select: text;
@@ -270,18 +284,20 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-bottom: auto;
+      margin-bottom: 0.4rem;
       user-select: text;
     }
     .badge {
       background: var(--badge-bg);
       color: var(--badge-color);
       padding: var(--badge-padding);
+      border: 1px solid var(--muted);
       border-radius: var(--badge-radius);
       font-weight: 600;
       font-size: 0.85rem;
       white-space: nowrap;
       transition: background-color 0.3s ease;
+      color: var(--text);
     }
     .badge:hover {
       background-color: var(--accent);
@@ -295,6 +311,22 @@
       display: none;
       user-select: text;
     }
+    .card-details ul {
+      padding-left: 1.2rem;
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .card-details ul li {
+      margin-bottom: 0.4rem;
+      line-height: 1.4;
+    }
+
+    .card-details ul li::marker {
+      color: var(--accent);
+    }
+
     .card.active .skills-badges {
       display: none;
     }
@@ -303,8 +335,11 @@
     }
 
     /* Work Experience */
+    #work-experience.dark {
+        color: f1f5f9;
+    }
     #work-experience {
-      max-width: 900px;
+      max-width: auto;
       margin: 0 0 3.5rem;
       user-select: text;
     }
@@ -315,6 +350,7 @@
     }
     .work-card {
       background: var(--card-bg);
+      border: 1px solid var(--muted);
       border-radius: 10px;
       box-shadow: 0 3px 15px var(--shadow);
       padding: 1.4rem 1.6rem;
@@ -322,7 +358,7 @@
       transition: transform var(--transition);
       display: flex;
       flex-direction: column;
-      min-height: 180px;
+      min-height: 120px;
       user-select: none;
     }
     .work-card:hover, .work-card:focus {
@@ -383,27 +419,32 @@
     .work-card.active .work-summary {
       display: none;
     }
+    
     .achievement-badges {
+      color: white;
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      padding-left: 1.2rem;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0rem;
       user-select: text;
     }
     .achievement-badge {
       background: var(--badge-bg);
-      color: var(--badge-color);
+      color: var(--text);
       padding: 0.25rem 0.7rem;
+      border: 1px solid var(--muted);
       border-radius: var(--badge-radius);
       font-weight: 600;
       font-size: 0.85rem;
       white-space: nowrap;
     }
+    .work-card.active .achievement-badge {
+      display: none;
+    }
     .work-stats {
       display: flex;
       gap: 1rem;
-      padding-left: 1.2rem;
+      padding-left: 0.2rem;
       margin-bottom: 0.6rem;
       user-select: text;
     }
@@ -426,20 +467,36 @@
       border-radius: 10px 0 0 10px;
       transition: width 0.5s ease;
       background: var(--accent);
+      
     }
 
     /* Skills grid & categories cards */
      #skills {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 1.5rem;
+      
     }
 
     /* Responsive grid for skill categories */
     .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
+      margin-bottom: 0.6rem;
+      user-select: none;
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid var(--muted);
+      border-radius: 10px;
+    }
+    .skill-category {
+      margin-bottom: 1.8rem;
+      user-select: none;
+      border: 1px solid var(--muted);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--card-bg);
+      box-shadow: 0 3px 10px var(--shadow);
     }
    
     .skill-category-header {
@@ -450,7 +507,6 @@
       padding: 0.7rem 1rem;
       font-weight: 700;
       font-size: 1.15rem;
-      color: var(--accent);
       background: var(--bg);
       user-select: none;
       transition: background-color 0.3s ease;
@@ -560,8 +616,10 @@
 </head>
 <body>
   <nav>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme" aria-pressed="false">🌓 Theme</button>
-    <button id="menuToggle" class="hamburger" aria-label="Toggle navigation">&#9776;</button>
+    <div class="nav-header">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme" aria-pressed="false">🌓 Theme</button>
+      <button id="menuToggle" class="hamburger" aria-label="Toggle navigation">&#9776;</button>
+    </div>
     <ul id="navLinks" class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#education">Education</a></li>
@@ -628,6 +686,7 @@
     <section id="projects" tabindex="-1">
       <h2>Projects</h2>
       <div class="projects">
+
         <article class="card" tabindex="0" aria-expanded="false" aria-controls="details-trashnet" role="button">
           <strong>TrashNet-Vision: Multi-Class Segmentation with U-Net</strong>
           <div class="skills-badges">
@@ -637,9 +696,14 @@
             <span class="badge">U-Net</span>
           </div>
           <div class="card-details" id="details-trashnet">
-            Built a U-Net segmentation pipeline on 60-class TrashNet masks using COCO-format polygons. Achieved 88% pixel accuracy and 72% mIoU with boundary-preserving outputs via skip connections and decoder upsampling.
+            <ul>
+              <li>Built a U-Net segmentation pipeline on 60-class TrashNet masks using COCO-format polygons</li>
+              <li>Achieved 88% pixel accuracy and 72% mIoU</li>
+              <li>Used skip connections and decoder upsampling to preserve object boundaries</li>
+            </ul>
           </div>
         </article>
+
         <article class="card" tabindex="0" aria-expanded="false" aria-controls="details-feedback" role="button">
           <strong>AI-Powered Feedback System for YouTube Creators</strong>
           <div class="skills-badges">
@@ -650,9 +714,14 @@
             <span class="badge">Seaborn</span>
           </div>
           <div class="card-details" id="details-feedback">
-            Built an end-to-end NLP system to extract comments via YouTube API, perform sentiment analysis and topic modeling (LDA), and deliver tailored feedback to creators. Automated visualization pipeline using Seaborn and deployed interactive summary.
+            <ul>
+              <li>Built an end-to-end NLP pipeline to extract and analyze YouTube comments</li>
+              <li>Performed sentiment analysis and topic modeling (LDA)</li>
+              <li>Delivered creator feedback via visualized insights using Seaborn</li>
+            </ul>
           </div>
         </article>
+
         <article class="card" tabindex="0" aria-expanded="false" aria-controls="details-census" role="button">
           <strong>Census Income Prediction (ML Pipeline)</strong>
           <div class="skills-badges">
@@ -662,9 +731,14 @@
             <span class="badge">Jupyter</span>
           </div>
           <div class="card-details" id="details-census">
-            Trained and optimized multiple classification models (SVC, Logistic Regression, Random Forest, Gradient Boosting) on the UCI Adult dataset. Achieved 87% accuracy with Gradient Boosting after hyperparameter tuning. Built reusable pipeline with modular code.
+            <ul>
+              <li>Trained multiple classifiers (SVC, Logistic Regression, Random Forest, XGBoost)</li>
+              <li>Achieved 87% accuracy using tuned Gradient Boosting model</li>
+              <li>Built a modular and reusable pipeline in Jupyter</li>
+            </ul>
           </div>
         </article>
+
         <article class="card" tabindex="0" aria-expanded="false" aria-controls="details-reporting" role="button">
           <strong>Automated Client Reporting Framework</strong>
           <div class="skills-badges">
@@ -674,23 +748,34 @@
             <span class="badge">Airflow</span>
           </div>
           <div class="card-details" id="details-reporting">
-            Designed client-facing automation scripts for weekly reporting and A/B test summaries. Reduced manual workload by 5 hours per analyst per week. Integrated automated visualizations and significance testing into executive-ready decks.
+            <ul>
+              <li>Automated weekly client reports and A/B test summaries</li>
+              <li>Reduced analyst workload by 5 hours/week</li>
+              <li>Integrated statistical testing and visualizations into slide decks</li>
+            </ul>
           </div>
         </article>
+
         <article class="card" tabindex="0" aria-expanded="false" aria-controls="details-musicmate" role="button">
           <strong>MusicMate: Cross-Platform Companion App</strong>
           <div class="skills-badges">
             <span class="badge">C#</span>
             <span class="badge">.NET MAUI</span>
-        <span class="badge">MVVM</span>
-        <span class="badge">REST API</span>
+            <span class="badge">MVVM</span>
+            <span class="badge">REST API</span>
+          </div>
+          <div class="card-details" id="details-musicmate">
+            <ul>
+              <li>Designed an app with real-time lyrics, playlists, and API integration</li>
+              <li>Followed MVVM architecture and mobile-first UI patterns</li>
+              <li>Deployed to Android and Windows using CI pipeline</li>
+            </ul>
+          </div>
+        </article>
+
       </div>
-      <div class="card-details" id="details-musicmate">
-        Designed and implemented a music app with real-time lyric search, playlist management, and external API integrations. Followed MVVM architecture and clean UI/UX patterns for a mobile-first experience. Deployed to Android and Windows via CI pipeline.
-      </div>
-    </article>
-  </div>
-</section>
+    </section>
+
 
 
     <section id="work-experience" tabindex="-1">
@@ -710,44 +795,30 @@
             <li>Designed scalable ETL processes to integrate diverse data sources including cloud APIs and relational databases.</li>
             <li>Conducted exploratory data analysis and feature engineering to enhance machine learning models.</li>
           </ul>
-          <div class="achievement-badges" aria-label="Achievements">
-            <span class="achievement-badge">Efficiency +20%</span>
-            <span class="achievement-badge">Bug Reduction -30%</span>
-            <span class="achievement-badge">Automation -55% Manual Work</span>
-          </div>
-          <div class="work-stats" aria-label="Performance metrics">
-            <div class="stat">
-              <div class="stat-label">Efficiency Improvement</div>
-              <div class="stat-bar"><div class="stat-bar-fill" style="width:20%"></div></div>
-            </div>
-            <div class="stat">
-              <div class="stat-label">Bug Reduction</div>
-              <div class="stat-bar"><div class="stat-bar-fill" style="width:30%"></div></div>
-            </div>
-            <div class="stat">
-              <div class="stat-label">Workload Reduction</div>
-              <div class="stat-bar"><div class="stat-bar-fill" style="width:55%"></div></div>
-            </div>
-          </div>
-          <div class="skills-badges" aria-label="Technologies used">
+             <div class="skills-badges" aria-label="Technologies used">
             <span class="badge">Python</span>
             <span class="badge">Airflow</span>
             <span class="badge">SQL</span>
             <span class="badge">Data Engineering</span>
             <span class="badge">Machine Learning</span>
           </div>
+          <div class="achievement-badges" aria-label="Achievements">
+            <span class="achievement-badge">Efficiency +20%</span>
+            <span class="achievement-badge">Bug Reduction -30%</span>
+            <span class="achievement-badge">Automation -55% Manual Work</span>
+          
+        </div>
         </article>
       </div>
     </section>
 
-<section id="skills" tabindex="-1">
-  <h2>Skills</h2>
-  <div class="skills-container">
-
-    <div class="skills-grid">
+    <section id="skills" tabindex="-1">
+      <h2>Skills</h2>
+      <div>
+        <div class="skills-grid">
       <div class="skill-category-header" role="button" tabindex="0" aria-expanded="false" aria-controls="subskills-programming">
-        Programming
-        <span aria-hidden="true">▶</span>
+          Programming
+          <span aria-hidden="true">▶</span>
       </div>
       <div class="subskills-list" id="subskills-programming" role="region" aria-hidden="true">
         <div class="subskill"><span class="subskill-name">Python</span> <span class="subskill-level">(Advanced)</span></div>
@@ -830,7 +901,7 @@
     </div>
 
   </div>
-</section>
+    </section>
 
   </main>
 
